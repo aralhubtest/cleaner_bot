@@ -81,6 +81,7 @@ class SqlLite:
         row = self.cursor.fetchone()
         return row
 
+
     def get_messages(self):
         self.cursor.execute("SELECT id, group_id, text FROM messages ")
         row = self.cursor.fetchall()
@@ -89,6 +90,11 @@ class SqlLite:
     def get_user_by_id(self, user_id):
         self.cursor.execute("SELECT id FROM users WHERE id =?", (user_id,))
         row = self.cursor.fetchone()
+        return row
+
+    def get_user_messages_by_id(self, user_id):
+        self.cursor.execute("SELECT id, group_id FROM messages WHERE user_id =?", (user_id,))
+        row = self.cursor.fetchall()
         return row
 
     def get_user_by_username(self, username):
